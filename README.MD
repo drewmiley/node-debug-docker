@@ -1,1 +1,1 @@
-https://hackernoon.com/14-steps-to-debugging-a-nodejs-application-running-in-a-docker-container-s52q3ydx
+To debug, install Docker in VS Code and run from here using the debug tab
