@@ -1,36 +1,12 @@
-const express = require('express')
-const app = express()
-const bodyParser = require('body-parser')
-const session = require('cookie-session')
-const urlencodedParser = bodyParser.urlencoded({ extended: false })
-const port = 3000
+const express = require('express');
+const app = express();
+const port = 3000;
 
-app.use(session({ secret: 'bestkeptsecret' }))
-  .use(function (req, res, next) {
-    next()
-  })
+app.get('/', (req, res) => {
+  console.log('Request made');
+  res.send('Hello World!');
+});
 
-  .get ('/todo', function (req, res) {
-    res.render('todo.ejs', { todolist: req.session.todolist })
-  })
-
-  .post ('/todo/add/', urlencodedParser, function (req, res) {
-    if (req.body.newtodo != '') {
-      req.session.todolist.push(req.body.newtodo)
-    }
-    res.redirect('/todo')
-  })
-
-  .get ('/todo/delete/:id', function (req, res) {
-    if (req.params.id != '') {
-      req.session.todolist.splice(req.params.id, 1)
-    }
-    res.redirect('/todo')
-  })
-
-  .use (function (req, res, next) {
-    res.redirect('/todo')
-  })
-
-
-  .listen(port, () => console.log(`MyTodo app is listening on port ${port}!`))
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+});
